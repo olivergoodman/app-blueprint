@@ -1,10 +1,10 @@
-from flask import Blueprint
+from flask import Blueprint, render_template, request
 from my_app.hello.models import MESSAGES
 
 hello = Blueprint('hello', __name__)
 
 @hello.route('/')
-@hello.route('/hello')
+@hello.route('/index')
 def hello_world():
     return MESSAGES['default']
 
