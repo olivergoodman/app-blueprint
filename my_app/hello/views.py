@@ -5,8 +5,19 @@ hello = Blueprint('hello', __name__)
 
 @hello.route('/')
 @hello.route('/index')
-def hello_world():
-    return MESSAGES['default']
+def index():
+	page_title = 'Oliver Goodman' 
+	print 'index was called'
+	return render_template('index.html',
+		title = "Home",
+		page_title = page_title)
+
+@hello.route('/contact')
+def contact():
+	page_title = 'Contact'
+	return render_template('contact.html',
+	title = 'Contact',
+	page_title = page_title)
 
 @hello.route('/show/<key>')
 def get_message(key):
