@@ -4,7 +4,7 @@ from my_app.hello.models import MESSAGES
 hello = Blueprint('hello', __name__)
 
 @hello.route('/')
-@hello.route('/index')
+@hello.route('/index.html')
 def index():
 	page_title = 'Oliver Goodman' 
 	print 'index was called'
@@ -12,7 +12,7 @@ def index():
 		title = "Home",
 		page_title = page_title)
 
-@hello.route('/contact')
+@hello.route('/contact.html')
 def contact():
 	page_title = 'Contact'
 	return render_template('contact.html',
