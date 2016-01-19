@@ -1,4 +1,13 @@
-from my_app import db
+from my_app import app
+
+### added from __init__.py ### was running into import error
+from my_app.hello.views import hello
+from flask.ext.sqlalchemy import SQLAlchemy
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
+db = SQLAlchemy(app)
+db.create_all()
+app.register_blueprint(hello)
+############
 
 class Page(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
@@ -15,9 +24,4 @@ class Page(db.Model):
 	def visitPage(self):
 		self.page_hits = self.page_hits + 1 
  
-#create pages and add them to the database --???
-home = Page('home')
-contact = Page('contact')
-db.session.add(home)
-db.session.add(contact)
-db.session.commit()
+
