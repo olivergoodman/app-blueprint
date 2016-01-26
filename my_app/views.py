@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, request
 from models import Page
+import app
 
 
 hello = Blueprint('hello', __name__)
@@ -8,16 +9,16 @@ hello = Blueprint('hello', __name__)
 @hello.route('/')
 @hello.route('/index.html')
 def index():
-	# updatePageDB('home')
 	page_title = 'Oliver Goodman' 
+	app.updatePageDB(page_title)
 	return render_template('index.html',
-		title = "Home",
+		title = 'Home',
 		page_title = page_title)
 
 @hello.route('/contact.html')
 def contact():
-	# updatePageDB('contact')
 	page_title = 'Contact'
+	app.updatePageDB(page_title)
 	return render_template('contact.html',
 	title = 'Contact',
 	page_title = page_title)

@@ -7,4 +7,3 @@ if __name__ == '__main__':
     if not os.path.isfile('/tmp/test.db'):
       setup_database(app)
     app.run()
-    

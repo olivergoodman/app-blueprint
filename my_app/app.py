@@ -12,19 +12,27 @@ def create_app():
     app.register_blueprint(hello, url_prefix='')
     return app 
 
-#create function to increment database by 1, call in views.py   
-def visit_page():
-    return
-
 def setup_database(app):
     with app.app_context():
         db.create_all()
-    home = Page()
-    home.name = "Home"
-    contact = Page()
-    contact.name = Page()
-    db.session.add(home)
-    db.session.add(contact)
-    db.session.commit()    
+    # home = Page()
+    # home.name = "Home"
+    # contact = Page()
+    # contact.name = Page()
+    # db.session.add(home)
+    # db.session.add(contact)
+    db.session.commit()   
+
+ 
+#check first if page already exists in table. if doesn't, add to db and set its hits to 1
+#create pages and add them to the database 
+def updatePageDB(title):
+    current_page = Page.query.filter_by(name=title).first()
+    if current_page is None:
+        current_page = Page(title)
+        current_page.visitPage()
+    else:
+        db.session.add(current_page)
+        db.session.commit()
 
 
