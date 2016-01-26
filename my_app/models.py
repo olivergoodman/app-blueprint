@@ -7,7 +7,7 @@ class Page(db.Model):
 
 	def __init__(self, name): #initalize new page to 0 page_hits
 		self.name = name
-		self.page_hits = 0
+		self.page_hits = 1
 
 	def __repr__(self):
 		return '<Page %d>' % self.name

@@ -9,7 +9,7 @@ hello = Blueprint('hello', __name__)
 @hello.route('/')
 @hello.route('/index.html')
 def index():
-	page_title = 'Oliver Goodman' 
+	page_title = 'Home' 
 	app.updatePageDB(page_title)
 	return render_template('index.html',
 		title = 'Home',
