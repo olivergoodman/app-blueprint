@@ -8,8 +8,8 @@ hello = Blueprint('hello', __name__)
 @hello.route('/_get_page_title', methods = ['GET', 'POST'])
 def get_page_title():
 	if request.method == 'POST':
-		page_title = request.args.get(data['page_title']) #work on transferring data correctly from AJAX -- 500 error
-		app.updatePageDB(page_title)
+		page_title = request.args.get('data') #work on transferring data correctly from AJAX -- 500 error
+		app.updatePageDB(page_title['page_title'])
 
 	#send back error msg/status to client side --> see AJAX tutorial
 	#update DB depending on what JSON received ---> http://flask.pocoo.org/docs/0.10/patterns/jquery/
