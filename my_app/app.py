@@ -15,10 +15,8 @@ def create_app():
 def setup_database(app):
     with app.app_context():
         db.create_all()
-    home = Page()
-    home.name = "Home"
-    contact = Page()
-    contact.name = Page()
+    home = Page("Home")
+    contact = Page("Contact")
     db.session.add(home)
     db.session.add(contact)
     db.session.commit()   
@@ -34,5 +32,8 @@ def updatePageDB(title):
         current_page.visitPage()
     db.session.add(current_page)
     db.session.commit()
+
+    #send some sort of feedback to the client side
+    #try/except, throwing errors(check the)
 
 
