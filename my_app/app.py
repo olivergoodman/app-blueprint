@@ -15,11 +15,11 @@ def create_app():
 def setup_database(app):
     with app.app_context():
         db.create_all()
-    home = Page("Home")
-    contact = Page("Contact")
-    db.session.add(home)
-    db.session.add(contact)
-    db.session.commit()   
+        home = Page("Home")
+        contact = Page("Contact")
+        db.session.add(home)
+        db.session.add(contact)
+        db.session.commit()   
 
  
 #check first if page already exists in table. if doesn't, add to db and set its hits to 1
@@ -28,10 +28,12 @@ def updatePageDB(title):
     current_page = Page.query.filter_by(name=title).first()
     if current_page is None:
         current_page = Page(title)
+        db.session.add(current_page)
+        db.session.commit()
     else:
         current_page.visitPage()
-    db.session.add(current_page)
-    db.session.commit()
+        db.session.add(current_page)
+        db.session.commit()
 
     #send some sort of feedback to the client side
     #try/except, throwing errors(check the)
