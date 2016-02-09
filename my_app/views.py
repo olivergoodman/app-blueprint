@@ -1,17 +1,16 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, json
 from models import Page
 import app
 
 
 hello = Blueprint('hello', __name__)
 
-#create new route taking JSON parameter to determine what to log in the database
-#pull database branch onto master, then delete old one and replace it with new one!
-
-@hello.route('/_get_page_title')
+@hello.route('/_get_page_title', methods = ['GET', 'POST'])
 def get_page_title():
-	page_title = request.json['page_title']
-	app.updatePageDB(page_title)
+	if request.method == 'POST':
+		page_title = request.args.get(data['page_title']) #work on transferring data correctly from AJAX -- 500 error
+		app.updatePageDB(page_title)
+
 	#send back error msg/status to client side --> see AJAX tutorial
 	#update DB depending on what JSON received ---> http://flask.pocoo.org/docs/0.10/patterns/jquery/
 
