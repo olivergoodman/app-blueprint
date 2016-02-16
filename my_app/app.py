@@ -2,7 +2,7 @@ from database import db
 from flask import Flask
 from models import Page
 from views import hello
-from sqlite import OperationalError
+from sqlite3 import OperationalError
 
 
 def create_app():
@@ -22,7 +22,7 @@ def setup_database(app):
     contact = Page("Contact")
     db.session.add(home)
     db.session.add(contact)
-    db.session.commit()     
+    db.session.commit()   
  
 #check first if page already exists in table. if doesn't, add to db and set its hits to 1
 #create pages and add them to the database 
@@ -32,7 +32,10 @@ def updatePageDB(title):
         current_page = Page(title)
     else:
         current_page.visitPage()
-    db.session.add(current_page)
-    db.session.commit()
+    try:
+        db.session.add(current_page)
+        db.session.commit()
+    except:
+        db.session.rollback()
     #try-except: manage sessions -- import OperationalError 
 
