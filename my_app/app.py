@@ -10,17 +10,18 @@ def create_app():
     app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:////Users/olivergoodman/Documents/github/app-blueprint/my_app/personal.db"
     db.init_app(app)    
     app.register_blueprint(hello, url_prefix='')
+    with app.app_context():
+            db.create_all()
     return app 
 
 def setup_database(app):
     with app.app_context():
         db.create_all()
-        home = Page("Home")
-        contact = Page("Contact")
-        db.session.add(home)
-        db.session.add(contact)
-        db.session.commit()   
-
+    home = Page("Home")
+    contact = Page("Contact")
+    db.session.add(home)
+    db.session.add(contact)
+    db.session.commit()     
  
 #check first if page already exists in table. if doesn't, add to db and set its hits to 1
 #create pages and add them to the database 
@@ -28,14 +29,9 @@ def updatePageDB(title):
     current_page = Page.query.filter_by(name=title).first()
     if current_page is None:
         current_page = Page(title)
-        db.session.add(current_page)
-        db.session.commit()
     else:
         current_page.visitPage()
-        db.session.add(current_page)
-        db.session.commit()
-
-    #send some sort of feedback to the client side
-    #try/except, throwing errors(check the)
+    db.session.add(current_page)
+    db.session.commit()
 
 

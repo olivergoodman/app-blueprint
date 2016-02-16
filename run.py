@@ -3,7 +3,7 @@ import os.path
 
 if __name__ == '__main__':
     app = create_app()
-    #from demonstrattion
-    if not os.path.isfile('/tmp/test.db'):
+    #if database doesn't exist, set it up
+    if not os.path.isfile('/Users/olivergoodman/Documents/github/app-blueprint/my_app/personal.db'):
       setup_database(app)
     app.run()
