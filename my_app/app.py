@@ -2,6 +2,7 @@ from database import db
 from flask import Flask
 from models import Page
 from views import hello
+from sqlite import OperationalError
 
 
 def create_app():
@@ -33,5 +34,5 @@ def updatePageDB(title):
         current_page.visitPage()
     db.session.add(current_page)
     db.session.commit()
-
+    #try-except: manage sessions -- import OperationalError 
 

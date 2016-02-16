@@ -4,13 +4,13 @@ $(document).ready(function(){
 	console.log("Page loaded.");
 
 	//creating json objext which contains page's title
-	var page_title = $(document).attr('title')
+	var page_title = $(document).attr('title');
+	var data = {"page_title" : page_title};
 
-	// getting 500 error
 	$.ajax({
 		type: 'POST',
 		url: '/_get_page_title',
-		data: {'page_title' : page_title}, //how to pass data? as string?
+		data: JSON.stringify(data, null, '\t'), //http://stackoverflow.com/questions/14908864/how-can-i-use-data-posted-from-ajax-in-flask
 		contentType: 'application/json;charset=UTF-8',
 		dataType : "json",
 		success: function(response) {
